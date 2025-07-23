@@ -1,68 +1,144 @@
-:root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+@import "tailwindcss";
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@200..1000&family=Poppins:wght@100;200;300;400;500;600;700;800;900&family=Rubik:wght@300;400;500;600;700;800;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@200..1000&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap");
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+@custom-variant dark (&:where(.dark, .dark *));
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
+@theme {
+  /* Font families */
+  --font-montserrat: "Montserrat", sans-serif;
+  --font-rubik: "Rubik", sans-serif;
+  --font-nunito: "Nunito", sans-serif;
+  --font-ubuntu: "Ubuntu", sans-serif;
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
+  /* Colors */
+  --color-soft-border: #e6e8fa;
+  --color-button-bg: #87ceeb;
+  --color-light-black: #0000005f;
+  --color-dark-red: #a70819;
+
+  --color-black: #000000;
+  --color-dim-gray: #696969;
+  --color-gray: #808080;
+  --color-dark-gray: #a9a9a9;
+  --color-silver: #c0c0c0;
+  --color-light-gray: #d3d3d3;
+  --color-gainsboro: #dcdcdc;
+  --color-slate-gray: #708090;
+  --color-dark-slate-gray: #2f4f4f;
+  --color-dim-slate-gray: #2f4f4f;
+  --color-midnight-blue: #191970;
+  --color-dark-blue: #00008b;
+  --color-navy: #000080;
+  --color-dark-green: #006400;
+  --color-forest-green: #228b22;
+  --color-dark-olive-green: #556b2f;
+  --color-dark-sea-green: #8fbc8f;
+  --color-dark-cyan: #008b8b;
+  --color-teal: #008080;
+  --color-dark-magenta: #8b008b;
+
+  /* Breakpoints */
+  --breakpoint-400: 400px;
+  --breakpoint-600: 600px;
+  --breakpoint-700: 700px;
+  --breakpoint-800: 800px;
+  --breakpoint-900: 900px;
+  --breakpoint-1000: 1050px;
+  --breakpoint-1100: 1110px;
+  --breakpoint-1300: 1300px;
+
+  /* Font Sizes */
+  --font-heading-sm: 32px;
+  --font-heading-md: 40px;
+  --font-heading-lg: 45px;
+  --font-heading-xl: 48px;
+  --font-heading-2xl: 48px;
+
+  --font-para-sm: 16px;
+  --font-para-md: 17px;
+  --font-para-lg: 17px;
+  --font-para-xl: 19px;
+  --font-para-2xl: 19px;
+
+  /* Line Heights */
+  --lh-tight: 1.2;
+  --lh-normal: 1.5;
 }
 
 body {
+  font-family: "Nunito", "Ubuntu", "Montserrat", "Rubik", "Nunito", "Poppins",
+    sans-serif; /* Set font stack with fallback */
+}
+
+.animationFromdowntoUp {
+  animation: openAn 0.1s forwards;
+}
+@keyframes openAn {
+  0% {
+    transform: translateY(60px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+.rotateAnimation {
+  animation: rotate 0.3s forwards;
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(-90deg);
+  }
+  100% {
+    transform: rotate(0deg); /* Final state: rotate back to 0 degrees */
+  }
+}
+@layer base {
+  * {
+    margin: 0;
+    padding: 0;
+  }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar {
+    height: 2px; /* Height of vertical scrollbar */
+    width: 2px; /* Width of horizontal scrollbar */
+  }
+
+  ::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    border-radius: 9999px; /* Ensure round scrollbar thumb */
+    background-image: linear-gradient(
+      to top right,
+      #8b5cf6,
+      #34d399,
+      #10b981
+    ); /* Example gradient colors */
+  }
+}
+/* Hide the arrows for number inputs in Chrome, Safari, Edge, and Opera */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none; /* For WebKit browsers */
+  -moz-appearance: textfield; /* For Firefox browsers */
+  appearance: none; /* Standard property for compatibility */
   margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+.loader {
+  border-top-color: #f7a582;
+  animation: spin 1s linear infinite;
 }
-
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
   }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
+  100% {
+    transform: rotate(360deg);
   }
 }
